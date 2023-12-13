@@ -1,6 +1,5 @@
 """
-
-This module implements the low pass filter using Butterworth filtering
+    This module implements the low pass filter using Butterworth filtering
     Butterworth Filter:
     Imagine Cleaning Up a Noisy Sound:
     You're listening to your favorite song, but there's some annoying background noise. You want to clean it up and hear only the music.
@@ -28,7 +27,9 @@ This module implements the low pass filter using Butterworth filtering
     It's chosen based on its ability to do this task smoothly and without causing distortion in the signal.
 
 """
-from scipy import butter, filtfilt
+from scipy.signal import butter, filtfilt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
 class low_pass_filter:
     
@@ -82,4 +83,24 @@ class low_pass_filter:
         """
         filtered_signal = filtfilt(self.b, self.a, self.signal)
         return filtered_signal
+
+class pca:
+    def __init__(self,
+                 df,
+                 cols,
+                 num_componenets):
+        self.x = df[cols]
+        self.n = num_components
+    
+    def fit(self):
+        # Standardizing the features
+        self.x = StandardScaler().fit_transform(self.x)
         
+        # Perform PCA
+        pca = PCA(num_cmponenets=self.n)
+        
+        principle_componenets = pca.fit_transform(self.x)
+        
+        self.pc_df = pd.DataFrame(principle_components,
+                                  columns = [f"pc_{i}" for i in range(self.n)])
+    
