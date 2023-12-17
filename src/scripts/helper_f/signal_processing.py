@@ -37,7 +37,7 @@ class low_pass_filter:
                 signal,
                 order,
                 fs,
-                cuttof_freq,
+                cutoff_freq,
                 time,
                 filter_type='low',
                 analog=False,
@@ -45,7 +45,7 @@ class low_pass_filter:
         
         self.signal = signal
         self.Nf = fs * 0.5
-        self.Wn = cutoff_freq / self.Nf
+        self.Wn = cutoff_freq/ self.Nf
         self.filter_type = filter_type
         self.ouput = output
         
@@ -88,7 +88,7 @@ class pca:
     def __init__(self,
                  df,
                  cols,
-                 num_componenets):
+                 num_components):
         self.x = df[cols]
         self.n = num_components
     
@@ -98,7 +98,6 @@ class pca:
         
         # Perform PCA
         pca = PCA(num_cmponenets=self.n)
-        
         principle_componenets = pca.fit_transform(self.x)
         
         self.pc_df = pd.DataFrame(principle_components,
